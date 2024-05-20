@@ -7,19 +7,6 @@ arr = [list(map(str, input())) for _ in range(n)]
 dr, dc = [0, -1, 0, 1], [-1, 0, 1, 0]
 
 
-# 최단 거리로 이동하는데 있어 가장 긴 시간이 걸리는 육지 두 곳에 나뉘어 묻혀있다
-
-
-
-# print(dist)
-
-
-# # 보물이 묻혀 있는 두 곳 사이를 최단 거리로 이동하는 시간을 출력
-
-
-
-# # tmp_d = float("INF")
-
 def bfs(q):
   max_t = -1
   visited = [[0 for _ in range(m)] for _ in range(n)]
@@ -41,6 +28,10 @@ ans_t = -1
 for i in range(n):
   for j in range(m):
     if arr[i][j] == 'L':
+      if 0<=i-1<n and 0<=i+1<n:
+        if arr[i-1][j] == 'L' and arr[i+1][j] == 'L': continue
+      if 0<=j-1<m and 0<=j+1<m:
+        if arr[i][j-1] == 'L' and arr[i][j-1] == 'L': continue
       q.append([i, j, 0])
       ans_t = max(ans_t, bfs(q))
 print(ans_t)
