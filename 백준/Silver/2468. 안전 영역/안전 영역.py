@@ -19,17 +19,18 @@ def bfs(q):
     for d in range(4):
       nr, nc = r + dr[d], c + dc[d]
       if(-1 < nr < N and -1 < nc < N and visited[nr][nc] == 0):
-        if arr[nr][nc] > h:
+        if arr[nr][nc] >= h:
           visited[nr][nc] = cnt
           q.append([nr, nc, cnt])
 
-for h in range(max_val):
+for h in range(1, max_val+1):
   q = deque()
   cnt = 1
+  # print("height = ", h)
   visited = [[0 for _ in range(N)] for _ in range(N)]
   for i in range(N):
     for j in range(N):
-      if arr[i][j] > h and visited[i][j] == 0:
+      if arr[i][j] >= h and visited[i][j] == 0:
         visited[i][j] = cnt
         q.append([i, j, cnt])
         bfs(q)
