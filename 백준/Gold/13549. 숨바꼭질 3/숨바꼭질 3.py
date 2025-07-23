@@ -1,27 +1,28 @@
 from collections import deque
-import sys
-
-input = sys.stdin.readline
-
 N, K = map(int, input().split())
-MAX = 100000
-INF = 10**18
+INF = float("inf")
+visited = [INF] * 100001
+q = deque()
+q.append([N, 0])
+visited[N] = 0
 
-dist = [INF] * (MAX + 1)
-dist[N] = 0
-
-dq = deque([N])
-while dq:
-    x = dq.popleft()
-    if x == K:
+while q:
+    pos_cur, t = q.popleft()
+    if pos_cur == K:
+        print(t)
         break
-    # 이동 리스트: (다음 위치, 비용)
-    for nx, w in ((x*2, 0), (x-1, 1), (x+1, 1)):
-        if 0 <= nx <= MAX and dist[nx] > dist[x] + w:
-            dist[nx] = dist[x] + w
-            if w == 0:
-                dq.appendleft(nx)
-            else:
-                dq.append(nx)
+    
+    pos_nxt = pos_cur * 2
+    if -1 < pos_nxt < 100001 and visited[pos_nxt] > visited[pos_cur]:
+        q.appendleft([pos_nxt, t])
+        visited[pos_nxt]=visited[pos_cur]
 
-print(dist[K])
+    pos_nxt = pos_cur + 1
+    if -1 < pos_nxt < 100001 and visited[pos_nxt] > visited[pos_cur]+1:
+        q.append([pos_nxt, t+1])
+        visited[pos_nxt]=visited[pos_cur]+1
+    
+    pos_nxt = pos_cur - 1
+    if -1 < pos_nxt < 100001 and visited[pos_nxt] > visited[pos_cur]+1:
+        q.append([pos_nxt, t+1])
+        visited[pos_nxt]=visited[pos_cur]+1
