@@ -1,29 +1,35 @@
-import sys, heapq
-input = sys.stdin.readline
+import sys
+import heapq
+input = sys.stdin.read
+data = input().split()
+V, E = int(data[0]), int(data[1])
+K = int(data[2])
+info = data[3:]
 
-V,E = map(int,input().split()) # 노드와 간선
-k=int(input()) # 시작 노드
+graph = [[] for _ in range(V+1)]
+INF = float("inf")
+dist = [INF] * (V+1)
+dist[K] = 0
 
-# 그래프 그리기
-graph=[[] for _ in range(V+1)]
-for _ in range(E):
-    e,v,w=map(int,input().split())
-    graph[e].append([w,v]) # [가중치, 노드]
+for i in range(E):
+    a, b, d = map(int, info[i*3:i*3+3])
+    graph[a].append((b, d))
 
-def dijkstra(start):
-    INF=1e9
-    visited=[INF]*(V+1) # 무한으로 초기화
-    visited[start]=0 # 시작 노드 가중치는 0
-    q=[[0,start]] # [가중치, 노드]
-    while q:
-        cost,node=heapq.heappop(q)
-        if cost > visited[node]: # 현재 이동하고자 하는 경로의 비용이 이전 비용보다 크다면 가지않음
-            continue
-        for k,u in graph[node]:
-            if visited[u] > visited[node]+k: # 이동 비용이 작다면
-                visited[u] = visited[node]+k # 그렇게 이동
-                heapq.heappush(q,[visited[u], u]) # 우큐에 삽입
-    return visited[1:] # 0번째 인덱스 제외
+pq = []
+heapq.heappush(pq, (0, K))
 
-for ans in dijkstra(k):
-    print(ans if ans!=1e9 else 'INF')
+while pq:
+    cur_dist, n1 = heapq.heappop(pq)
+    if cur_dist > dist[n1]:
+        continue
+
+    for n2, d in graph[n1]:
+        if dist[n2] > cur_dist + d:
+            dist[n2] = cur_dist + d
+            heapq.heappush(pq, (dist[n2], n2))
+
+for i in range(1, V+1):
+    if dist[i] == INF:
+        print("INF")
+    else:
+        print(dist[i])
