@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-14",
+  "entries": {
+    "2026-10-14": {
+      "action": "save",
+      "lessonId": "2026-10-14",
+      "source": "def solution(brightness, path):\n  sum_card = 0\n  for i, val in enumerate(path):\n    sum_card += brightness[val] * (i+1)\n  return sum_card\n",
+      "reflection": "for pos, idx in enumerate(path):",
+      "seconds": 664,
+      "passed": 4,
+      "total": 4,
+      "helpCount": 0,
+      "solutionViewed": false,
+      "exerciseId": "build-weighted",
+      "savedAt": "2026-10-13T15:45:30.493Z",
+      "best": "independent"
+    }
+  },
+  "reviews": {}
+}
