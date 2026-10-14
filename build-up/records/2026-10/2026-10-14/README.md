@@ -25,3 +25,23 @@ def solution(brightness, path):
 
 ````
 
+## 원본을 지키는 수정본
+
+- 오늘 검사: 4/4
+- 힌트: 0회 · 해설 확인: 있음
+- 학습 시간: 19분 16초
+
+### 회고
+
+board r/c 중 changes에 해당하는 r/c의 값을 바꾸는 방법
+
+### 시도한 코드
+
+````python
+def solution(board, changes):
+  nxt = [row[:] for row in board]
+  for r, c, val in changes:
+    nxt[r][c] = val
+  return nxt
+````
+

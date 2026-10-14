@@ -14,6 +14,20 @@
       "exerciseId": "build-weighted",
       "savedAt": "2026-10-13T15:45:30.493Z",
       "best": "independent"
+    },
+    "2026-10-15": {
+      "action": "save",
+      "lessonId": "2026-10-15",
+      "source": "def solution(board, changes):\n  nxt = [row[:] for row in board]\n  for r, c, val in changes:\n    nxt[r][c] = val\n  return nxt",
+      "reflection": "board r/c 중 changes에 해당하는 r/c의 값을 바꾸는 방법",
+      "seconds": 1156,
+      "passed": 4,
+      "total": 4,
+      "helpCount": 0,
+      "solutionViewed": true,
+      "exerciseId": "build-copy-updates",
+      "savedAt": "2026-10-14T14:53:30.995Z",
+      "best": "guided"
     }
   },
   "reviews": {}
